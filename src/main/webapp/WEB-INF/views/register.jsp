@@ -45,27 +45,27 @@
 
 		<table align="center">
 			<tr>
-				<td><form:label path="username">Username</form:label></td>
+				<td><form:label path="username">Usuario</form:label></td>
 				<td><form:input class="logininput" path="username" name="username" id="username" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="password">Password</form:label></td>
+				<td><form:label path="password">Contraseña</form:label></td>
 				<td><form:password class="logininput" path="password" name="password"
 						id="password" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="firstname">FirstName</form:label></td>
+				<td><form:label path="firstname">Nombre</form:label></td>
 				<td><form:input class="logininput" path="firstname" name="firstname"
 						id="firstname" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="lastname">LastName</form:label></td>
+				<td><form:label path="lastname">Apellido</form:label></td>
 				<td><form:input class="logininput" path="lastname" name="lastname" id="lastname" /></td>
 			</tr> 
 
 			<tr>
 				<td></td>
-				<td><form:button class="ingresar" id="register" name="register">Register</form:button></td>
+				<td><form:button class="ingresar" id="register" name="register">Registrar</form:button></td>
 			</tr>
 			<tr></tr>
 			<tr>

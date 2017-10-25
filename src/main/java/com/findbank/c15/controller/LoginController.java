@@ -43,7 +43,7 @@ public class LoginController {
     return mav;
   }
 	
-  @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
+  @RequestMapping(value = "/home", method = RequestMethod.POST)
   public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
       @ModelAttribute("login") Login login) {
     ModelAndView mav = null;
@@ -52,7 +52,7 @@ public class LoginController {
 
     if (null != usuario) {
       mav = new ModelAndView("welcome");
-      mav.addObject("firstname", usuario.getFirstname());
+      mav.addObject("nombre", usuario.getFirstname());
     } else {
       mav = new ModelAndView("login");
       mav.addObject("message", "Username o Password es invalido");

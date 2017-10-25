@@ -40,7 +40,7 @@
 		
 		<div class="content-login" align="center">
 		 
-			<form:form id="loginForm" modelAttribute="login" action="loginProcess" method="post">
+			<form:form id="loginForm" modelAttribute="login" action="home" method="post">
 				<table align="center">
 				
 				<tr>	 
@@ -67,7 +67,6 @@
 				</table>
 			</form:form>
 		</div>
-	</div>
-	
+	</div> 
 </h:body> 
 </html>

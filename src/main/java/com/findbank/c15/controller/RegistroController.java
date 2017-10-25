@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.findbank.c15.model.Login;
 import com.findbank.c15.model.Usuario;
 import com.findbank.c15.service.UsuarioService;
 
@@ -29,9 +30,11 @@ public class RegistroController {
 	  @RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
 	  public ModelAndView addUsuario(HttpServletRequest request, HttpServletResponse response,
 	      @ModelAttribute("user") Usuario usuario) {
-
+		   
 		  usuarioService.register(usuario);
-
-	    return new ModelAndView("welcome", "firstname", usuario.getFirstname());
+		  ModelAndView mav = new ModelAndView("redirect:login");
+		  mav.addObject("nombre", usuario.getFirstname());
+		  
+		  return mav;
 	  }
 	}
