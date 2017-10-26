@@ -23,6 +23,28 @@
   <link rel="stylesheet" href="<c:url value="/resources/vendor/bootstrap/css/bootstrap.min.css"/>">
   <link rel="stylesheet" href="<c:url value="/resources/vendor/font-awesome/css/font-awesome.min.css"/>">
   <link rel="stylesheet" href="<c:url value="/resources/css/sb-admin.css"/>">
+  
+   <style type="text/css"> 
+#cajapadre { 
+  display: flex;
+  justify-content: center;
+}   
+#modalcontenido{ 
+  position: relative;
+  width: 850px;
+} 
+ #map {
+        /* Tamaño del mapa */
+        width: 90%;
+        height: 400px;
+ }
+ #coords{
+  width: 500px;}
+#cajon3{
+ justify-content: center 
+} 
+</style>
+  
 </h:head>
 
 <h:body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -45,13 +67,13 @@
         <hr>
         
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="welcome.html">
+          <a class="nav-link" href="home">
             <i class="fa fa-fw fa-area-chart"></i>
             <span class="nav-link-text">Mis Agentes</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="edit.html">
+          <a class="nav-link" href="welcome2">
           <i class="fa fa-map-o"  ></i>
             <span class="nav-link-text">Map</span>
           </a>
@@ -220,7 +242,9 @@
   <!-- crear card Modal--> 
    <div class="modal fade" id="crearCardModal" tabindex="-1" role="dialog" aria-labelledby="eModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+  
+  
+    <div class="modal-content" id="modalcontenido" >
       <div class="modal-header">
         <h5 class="modal-title" id="eModalLabel">Nuevo Agente</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -228,6 +252,9 @@
         </button>
       </div>
       <div class="modal-body">
+      
+      <div id="cajapadre">
+       <!-- dentro del Modal con formulario--> 
         <form>
           <div class="form-group">
             <label for="recipient-name" class="form-control-label">Nombre:</label>
@@ -249,6 +276,25 @@
             </select> 
           </div>
         </form>
+          <!-- dentro del Modal con mapa--> 
+        <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Obtener coordenadas con un marcador</h3>
+        </div>
+        <div class="panel-body">
+          <button id="boton" class="btn">Ubicarme</button>
+          <div id="map"></div>
+        </div>
+      </div><br>
+      <p>Coordenadas: <input type="text" id="coords" />
+      <p>Latitud: <input type="hidden" id="lat" />
+      <p>Longitud: <input type="text" id="long" />
+      <p>.</p>
+        </div> 
+        
+		</div> 
+         
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -289,6 +335,81 @@
         }
     }
  
+</script>
+<script>
+    var marker;          //variable del marcador
+    var coords = {};    //coordenadas obtenidas con la geolocalización
+
+    //Funcion principal
+    initMap = function () {
+
+    //usamos la API para geolocalizar el usuario
+    navigator.geolocation.getCurrentPosition(
+      function (position){
+        coords =  {
+          lng: position.coords.longitude,
+          lat: position.coords.latitude
+        };
+        setMapa(coords);  //pasamos las coordenadas al metodo para crear el mapa
+      },function(error){console.log(error);});
+    }
+
+    function setMapa (coords) {   
+    //Se crea una nueva instancia del objeto mapa
+    var map = new google.maps.Map(document.getElementById('map'),{
+      zoom: 13,
+      center:new google.maps.LatLng(coords.lat,coords.lng),
+    });
+
+    //Creamos el marcador en el mapa con sus propiedades -12.044167, -76.952900
+    //position pondremos las mismas coordenas que obtuvimos en la geolocalización
+    marker = new google.maps.Marker({
+      map: map,
+        draggable: true,
+        animation: google.maps.Animation.DROP,
+        title: 'Aqui es',
+        position: new google.maps.LatLng(coords.lat,coords.lng),
+
+      });
+      //agregamos un evento al marcador junto con la funcion callback al igual que el evento dragend que indica 
+      //cuando el usuario suelta el marcador
+      marker.addListener('click', toggleBounce);
+      
+      marker.addListener( 'dragend', function (event) {
+        //escribimos las coordenadas de la posicion actual del marcador dentro del input #coords
+        document.getElementById("coords").value = this.getPosition().lat()+","+ this.getPosition().lng();
+        document.getElementById("lat").value = this.getPosition().lat();
+        document.getElementById("long").value = this.getPosition().lng();
+      });
+    }
+
+    //callback al hacer clic en el marcador lo que hace es quitar y poner la animacion BOUNCE
+    function toggleBounce() {
+      if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+      }
+    }
+
+    // Carga de la libreria de google maps 
+  </script>
+<script>
+// seleccionamos el enlace 
+var boton = document.getElementById("boton"); 
+// cuando se pulsa en el enlace
+boton.onclick = function(e) {
+    // evitamos la acción por defecto
+    e.preventDefault();
+    // creamos una etiqueta script
+    var s = document.createElement("script");
+    // indicamos en el atributo src el fichero que quieres cargar
+    s.src = "https://maps.googleapis.com/maps/api/js?callback=initMap";
+    // lo añadimos al documento (y se ejecuta automaticamente)
+    document.querySelector("body").appendChild(s);
+    // borra el script del documento (para evitar basura si se ejecuta multiples veces)
+    s.remove();
+}
 </script>
  
 </h:body> 

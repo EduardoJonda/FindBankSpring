@@ -55,8 +55,16 @@ public class LoginController {
       mav.addObject("nombre", usuario.getFirstname());
     } else {
       mav = new ModelAndView("login");
-      mav.addObject("message", "Username o Password es invalido");
+      mav.addObject("message", "El usuario o contraseña ingresado es invalido");
     }
     return mav;
   }
+  
+  @RequestMapping(value = "/welcome2", method = RequestMethod.GET)
+  public ModelAndView showWelcome2(HttpServletRequest request, HttpServletResponse response) {
+    ModelAndView mav = new ModelAndView("welcome2"); 
+
+    return mav;
+  }
+  
 }
