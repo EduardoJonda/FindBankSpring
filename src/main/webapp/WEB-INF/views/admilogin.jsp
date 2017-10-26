@@ -31,7 +31,7 @@
 	
 	<div>
 		<div align="center">
-			<h1 class="login">Login</h1>
+			<h1 class="login">Login Admi</h1>
 			<hr align="center"></hr>
 			
 			</br><p><td><h3>${message}</h3></td></p></br>
@@ -40,7 +40,7 @@
 		
 		<div class="content-login" align="center">
 		 
-			<form:form id="loginForm" modelAttribute="login" action="home" method="post">
+			<form:form id="loginForm" modelAttribute="login" action="administrador" method="post">
 				<table align="center">
 				
 				<tr>	 

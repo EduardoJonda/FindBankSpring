@@ -13,6 +13,9 @@
 
 	<bean id="usuarioService" class="com.findbank.c15.service.UsuarioServiceImpl" />
 	<bean id="usuarioDao" class="com.findbank.c15.dao.UsuarioDaoImpl" />
+	
+	<bean id="admiService" class="com.findbank.c15.service.AdmiServiceImpl" />
+	<bean id="admiDao" class="com.findbank.c15.dao.AdmiDaoImpl" />
 
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="datasource" />
