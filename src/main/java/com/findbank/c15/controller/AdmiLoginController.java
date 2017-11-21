@@ -44,14 +44,6 @@ public class AdmiLoginController {
 	      mav.addObject("message", "El nombre de usuario o contraseña ingresado es invalido");
 	    }
 	    return mav;
-	  }
-	  
-	  /*@RequestMapping(value = "/welcomeadmi2", method = RequestMethod.GET)
-	  public ModelAndView showWelcome2(HttpServletRequest request, HttpServletResponse response) {
-	    ModelAndView mav = new ModelAndView("welcomeadmi2"); 
-
-	    return mav;
-	  }*/
-	
+	  } 
 
 }
