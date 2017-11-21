@@ -19,7 +19,7 @@
 	</div> 
 <h:body>
 	
-	<div  style="background: linear-gradient(to right, #226b9b,#2e85bf);">
+	<div  style="background: linear-gradient(to bottom, #080169,#08025C);">
 		<div align="">
 		<br></br><br></br>
 		<div align="center">

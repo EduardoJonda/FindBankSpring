@@ -40,18 +40,18 @@ public class AdmiLoginController {
 	      mav = new ModelAndView("redirect:administrador");
 	      mav.addObject("nombre", admin.getFirstname());
 	    } else {
-	      mav = new ModelAndView("login");
-	      mav.addObject("message", "El usuario o contraseña ingresado es invalido");
+	      mav = new ModelAndView("loginadmi");
+	      mav.addObject("message", "El nombre de usuario o contraseña ingresado es invalido");
 	    }
 	    return mav;
 	  }
 	  
-	  @RequestMapping(value = "/welcomeadmi2", method = RequestMethod.GET)
+	  /*@RequestMapping(value = "/welcomeadmi2", method = RequestMethod.GET)
 	  public ModelAndView showWelcome2(HttpServletRequest request, HttpServletResponse response) {
 	    ModelAndView mav = new ModelAndView("welcomeadmi2"); 
 
 	    return mav;
-	  }
+	  }*/
 	
 
 }

@@ -1,5 +1,8 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
   xmlns:f="http://java.sun.com/jsf/core"
@@ -231,7 +234,7 @@
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <div class="modal-body">Ustede acaba de oprimir el boton "Cerrar Sesión". Desea cerrar sesión de todas maneras?</div>
+          <div class="modal-body">Usted acaba de oprimir el boton "Cerrar Sesión". Desea cerrar sesión de todas maneras?</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
             <a class="btn btn-primary" href="login.html">Cerrar sesión</a>
@@ -254,30 +257,8 @@
       <div class="modal-body">
       
       <div id="cajapadre">
-       <!-- dentro del Modal con formulario--> 
-        <form>
-          <div class="form-group">
-            <label for="recipient-name" class="form-control-label">Nombre:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="recipient-name" class="form-control-label">Dirreción:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="recipient-name" class="form-control-label">Distrito:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="text" class="form-control-label">Operatividad:</label>
-            <select class="form-control">
-              <option>Activo</option>
-              <option>Desactivo</option>
-            </select> 
-          </div>
-        </form>
-          <!-- dentro del Modal con mapa--> 
-        <div class="container">
+      
+       <div class="container">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3>Obtener coordenadas con un marcador</h3>
@@ -287,19 +268,72 @@
           <div id="map"></div>
         </div>
       </div><br>
-      <p>Coordenadas: <input type="text" id="coords" />
+      <p>Coordenadas: <input type="hidden" id="coords" />
       <p>Latitud: <input type="hidden" id="lat" />
-      <p>Longitud: <input type="text" id="long" />
-      <p>.</p>
+      <p>Longitud: <input type="hidden" id="long" />
+       
         </div> 
+      
+      
+       <!-- dentro del Modal con formulario--> 
+        <form:form method="post" modelAttribute="agentes" action="/c15/addAgenteUser">
+	<table class="table"> 
+		<tr>
+		<form:hidden path="idAgente" />
+          <td><form:label path="nombre">Nombre:</form:label></td>
+          <td><form:input class="form-control" path="nombre" size="30" maxlength="30"></form:input></td>
+        </tr>
+		<tr>
+		  <td><form:label path="direccion">Direccion:</form:label></td>
+          <td><form:input class="form-control" path="direccion" size="30" maxlength="30"></form:input></td>
+		</tr>
+		<tr>
+		  <td><form:label path="lat">lat:</form:label></td>
+          <td><form:input class="form-control" path="lat" size="30" maxlength="30"></form:input></td>
+		</tr>
+		<tr>
+		  <td><form:label path="lng">lng:</form:label></td>
+          <td><form:input class="form-control" path="lng" size="30" maxlength="30"></form:input></td>
+		</tr>
+		<tr>
+		  <td><form:label path="tipo">tipo:</form:label></td>
+          <td><form:input class="form-control" path="tipo" size="30" maxlength="30"></form:input></td>
+		</tr>
+		<tr>
+		  <td><form:label path="sistema">sistema:</form:label></td>
+          <td><form:input class="form-control" path="sistema" size="30" maxlength="30"></form:input></td>
+		</tr>
+		<tr>
+		  <td><form:label path="seguridad">seguridad:</form:label></td>
+          <td><form:input class="form-control" path="seguridad" size="30" maxlength="30"></form:input></td>
+		</tr>
+		<tr>
+		  <td><form:label path="horario">horario:</form:label></td>
+          <td><form:input class="form-control" path="horario" size="30" maxlength="30"></form:input></td>
+		</tr>
+		<tr>
+		  <td><form:label path="descripcion">descripcion:</form:label></td>
+          <td><form:input class="form-control" path="descripcion" size="30" maxlength="30"></form:input></td>
+		</tr> 
+		  
+		
+      </div>
+	</table> 
+	
+	
+	 <div class="modal-footer">
+      <input type="submit" class="btn btn-primary" value="Aceptar" />
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        </div> 
+        
+</form:form>
+          <!-- dentro del Modal con mapa--> 
+       
         
 		</div> 
          
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Crear</button>
-      </div>
+      
     </div>
   </div>
 </div>
@@ -322,9 +356,7 @@
 <script type="text/javascript">
     $().ready(function(){
         $('[rel="tooltip"]').tooltip();
-
     });
-
     function rotateCard(btn){
         var $card = $(btn).closest('.card-container');
         console.log($card);
@@ -339,10 +371,8 @@
 <script>
     var marker;          //variable del marcador
     var coords = {};    //coordenadas obtenidas con la geolocalización
-
     //Funcion principal
     initMap = function () {
-
     //usamos la API para geolocalizar el usuario
     navigator.geolocation.getCurrentPosition(
       function (position){
@@ -353,14 +383,12 @@
         setMapa(coords);  //pasamos las coordenadas al metodo para crear el mapa
       },function(error){console.log(error);});
     }
-
     function setMapa (coords) {   
     //Se crea una nueva instancia del objeto mapa
     var map = new google.maps.Map(document.getElementById('map'),{
       zoom: 13,
       center:new google.maps.LatLng(coords.lat,coords.lng),
     });
-
     //Creamos el marcador en el mapa con sus propiedades -12.044167, -76.952900
     //position pondremos las mismas coordenas que obtuvimos en la geolocalización
     marker = new google.maps.Marker({
@@ -369,7 +397,6 @@
         animation: google.maps.Animation.DROP,
         title: 'Aqui es',
         position: new google.maps.LatLng(coords.lat,coords.lng),
-
       });
       //agregamos un evento al marcador junto con la funcion callback al igual que el evento dragend que indica 
       //cuando el usuario suelta el marcador
@@ -382,7 +409,6 @@
         document.getElementById("long").value = this.getPosition().lng();
       });
     }
-
     //callback al hacer clic en el marcador lo que hace es quitar y poner la animacion BOUNCE
     function toggleBounce() {
       if (marker.getAnimation() !== null) {
@@ -391,7 +417,6 @@
         marker.setAnimation(google.maps.Animation.BOUNCE);
       }
     }
-
     // Carga de la libreria de google maps 
   </script>
 <script>
@@ -404,7 +429,8 @@ boton.onclick = function(e) {
     // creamos una etiqueta script
     var s = document.createElement("script");
     // indicamos en el atributo src el fichero que quieres cargar
-    s.src = "https://maps.googleapis.com/maps/api/js?callback=initMap";
+    //s.src = "https://maps.googleapis.com/maps/api/js?callback=initMap"; 
+    s.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCUtPyzBRpipnztN8w9nFA88QRBKbJp7ak&callback=initMap";
     // lo añadimos al documento (y se ejecuta automaticamente)
     document.querySelector("body").appendChild(s);
     // borra el script del documento (para evitar basura si se ejecuta multiples veces)
