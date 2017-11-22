@@ -20,7 +20,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <title>Bienvenido a Find Bank</title>
-  <!-- Bootstrap core    CSS--> 
+  <!-- Bootstrap core CSS--> 
   
   
   <link rel="stylesheet" href="<c:url value="/resources/vendor/bootstrap/css/bootstrap.min.css"/>">
